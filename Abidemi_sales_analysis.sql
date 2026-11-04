@@ -51,9 +51,11 @@ WHERE management.Region = 'EAST';
 
 -- Put each side by side and add the totals
 SELECT (
-	SELECT SUM(Sale_Amount) FROM store_sales
-	WHERE Store_ID BETWEEN 865 AND 872
-	ORDER BY Sale_Amount DESC, Transaction_Date DESC) AS TotalConnecticutSale 
+	SELECT SUM(Sale_Amount) 
+	FROM store_sales
+	JOIN store_locations
+	ON store_sales.Store_ID = store_locations.StoreID
+	WHERE store_locations.State = 'Connecticut') AS TotalConnecticutSale 
     ,
 	(SELECT SUM(store_sales.Sale_Amount) FROM store_sales
 	JOIN store_locations
