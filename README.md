@@ -1,4 +1,6 @@
 # Capstone_1
+* Name: Gbolahan Abidemi
+* Sales Territory: Connecticut
 
 # Description:
 This Capstone project analyzes sales in the Connecticut territory. 
