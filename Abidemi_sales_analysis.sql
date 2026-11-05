@@ -86,7 +86,7 @@ GROUP BY SalesMonth, products.CategoryID, inventory_categories.Category;
 Can you provide a ranking of in-store sales performance by each store in the sales territory, or a
 ranking of online sales performance by state within an online sales territory?
 */
-SELECT SUM(store_sales.Sale_Amount) AS 'Sales', store_sales.Store_ID, store_locations.Storelocation, store_locations.State
+SELECT SUM(store_sales.Sale_Amount) AS Sales, store_sales.Store_ID, store_locations.Storelocation, store_locations.State
 FROM store_sales
 JOIN store_locations
 ON store_sales.Store_ID = store_locations.StoreID
@@ -94,15 +94,24 @@ WHERE store_locations.State = 'Connecticut'
 GROUP BY store_sales.Store_ID, store_locations.State, store_locations.StoreLocation
 ORDER BY Sales DESC;
 
+-- Breaks down the sales by each store per year
+SELECT store_locations.StoreLocation AS StoreName, store_sales.Store_ID, YEAR(store_sales.Transaction_Date) AS SalesYear, 
+SUM(store_sales.Sale_Amount) AS Sales
+FROM store_sales
+JOIN store_locations
+ON store_sales.Store_ID = store_locations.StoreID
+WHERE store_locations.State = 'Connecticut'
+GROUP BY store_sales.Store_ID, store_locations.StoreLocation, SalesYear
+ORDER BY StoreName ASC, SalesYear ASC;
 /*
 SALES RECOMMENDATION:
 I recommend focusing sales attention on Old Saybrook and Darien because they generated the lowest total revenue 
-among Connecticut stores during the 4 years analyzed. It would still be efficient to tackle all 4 lowest selling stores, but we should focus on the bottom 2 first and see
-what works before we focus on the remaining stores before rinsing and repeating. Management should investigate opportunities to improve sales at these locations 
-and compare their practices with New London which was the highest-revenue store. The monthly revenue and product-category results can also help guide when to run 
-promotions and which categories to consider pushing to consumers, which I would probably suggest more tech options. I also would recommend pushing more promotion 
-and ads in February, since it had the lowest monthly revenue in 2025. The company should also investigate October’s unusually high growth rate from 2024 - 2025 and use 
-whatever worked during that month to aid in February's growth. 
+among Connecticut stores during the 4 years analyzed. It would still be efficient to tackle all the 4 lowest selling stores, but we should focus on the bottom 2 first and see
+what works before we focus on the remaining stores before rinsing and repeating. Last quarter, New Haven had the lowest sales across all the stores and we should focus on
+increasing ads and products in that store to increase sales. Management should investigate opportunities to improve sales at these locations and compare what worked with New 
+London which was the highest-revenue store. The monthly revenue and product-category results can also help guide when to run promotions and which categories to consider 
+pushing to consumers, which I would probably suggest more tech options. I also would recommend pushing more promotion and ads in February, since it had the lowest monthly 
+revenue in 2025. The company should also investigate October’s unusually high growth rate from 2024 - 2025 and use whatever worked during that month to aid in February's growth. 
 */
 
 
