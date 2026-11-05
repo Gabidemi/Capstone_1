@@ -94,8 +94,15 @@ WHERE store_locations.State = 'Connecticut'
 GROUP BY store_sales.Store_ID, store_locations.State, store_locations.StoreLocation
 ORDER BY Sales DESC;
 
-
-
-
+/*
+SALES RECOMMENDATION:
+I recommend focusing sales attention on Old Saybrook and Darien because they generated the lowest total revenue 
+among Connecticut stores during the 4 years analyzed. It would still be efficient to tackle all 4 lowest selling stores, but we should focus on the bottom 2 first and see
+what works before we focus on the remaining stores before rinsing and repeating. Management should investigate opportunities to improve sales at these locations 
+and compare their practices with New London which was the highest-revenue store. The monthly revenue and product-category results can also help guide when to run 
+promotions and which categories to consider pushing to consumers, which I would probably suggest more tech options. I also would recommend pushing more promotion 
+and ads in February, since it had the lowest monthly revenue in 2025. The company should also investigate October’s unusually high growth rate from 2024 - 2025 and use 
+whatever worked during that month to aid in February's growth. 
+*/
 
 
