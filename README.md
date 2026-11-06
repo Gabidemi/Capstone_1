@@ -2,6 +2,9 @@
 * Name: Gbolahan Abidemi
 * Sales Territory: Connecticut
 
+10 - Minute Capstone Video:
+https://drive.google.com/drive/u/0/starred
+
 # Description:
 This Capstone project analyzes sales in the Connecticut territory. 
 I will use SQL to calculate total revenue across different stores in Connecticut and compare online and in-store sales and answer the relevant business questions such as:
@@ -17,4 +20,3 @@ I will use SQL to calculate total revenue across different stores in Connecticut
  ∗ Can you provide a ranking of in-store sales performance by each store in the sales territory, or a ranking of online sales performance by state within an online sales territory?
  
  ∗ What is your recommendation for where to focus sales attention in the next quarter?.
-
