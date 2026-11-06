@@ -94,15 +94,34 @@ WHERE store_locations.State = 'Connecticut'
 GROUP BY store_sales.Store_ID, store_locations.State, store_locations.StoreLocation
 ORDER BY Sales DESC;
 
+
+
+-- Help with Excel data visuals
+
 -- Breaks down the sales by each store per year
-SELECT store_locations.StoreLocation AS StoreName, store_sales.Store_ID, YEAR(store_sales.Transaction_Date) AS SalesYear, 
-SUM(store_sales.Sale_Amount) AS Sales
+SELECT store_locations.StoreLocation AS StoreName, store_sales.Store_ID, MONTHNAME(store_sales.Transaction_Date) AS SalesMonth, 
+YEAR(store_sales.Transaction_Date) AS SalesYear, SUM(store_sales.Sale_Amount) AS Sales
 FROM store_sales
 JOIN store_locations
 ON store_sales.Store_ID = store_locations.StoreID
 WHERE store_locations.State = 'Connecticut'
-GROUP BY store_sales.Store_ID, store_locations.StoreLocation, SalesYear
-ORDER BY StoreName ASC, SalesYear ASC;
+GROUP BY store_sales.Store_ID, store_locations.StoreLocation, SalesMonth, MONTH(store_sales.Transaction_Date), SalesYear
+ORDER BY MONTH(store_sales.Transaction_Date), SalesMonth ASC;
+
+-- Sum of transactions per month per product category
+SELECT MONTHNAME(store_sales.Transaction_Date) AS SalesMonth, products.CategoryID, inventory_categories.Category, COUNT(*) AS TransactionCount, 
+CONCAT('$', ROUND(SUM(store_sales.Sale_Amount),2)) AS Total
+FROM store_sales 
+JOIN store_locations
+ON store_sales.Store_ID = store_locations.StoreId
+JOIN products
+ON store_sales.Prod_Num = Products.ProdNum
+JOIN inventory_categories
+ON products.Categoryid = inventory_categories.Categoryid
+WHERE store_locations.State = 'Connecticut'
+GROUP BY SalesMonth, products.CategoryID, inventory_categories.Category;
+
+
 /*
 SALES RECOMMENDATION:
 I recommend focusing sales attention on Old Saybrook and Darien because they generated the lowest total revenue 
